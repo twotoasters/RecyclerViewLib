@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="animations">
+        <item>Fade (Default)</item>
+        <item>Flip Down</item>
+        <item>Fly Right</item>
+        <item>From Top</item>
+        <item>Garage Door</item>
+    </string-array>
+</resources>
