@@ -29,6 +29,9 @@ import com.twotoasters.R;
  * <p>
  * CardView uses <code>elevation</code> property on L for shadows and falls back to a custom shadow
  * implementation on older platforms.
+ *
+ * <strong>Lies!</strong> Unfortunately we cannot compile against L yet without the minSdk version being L.
+ * This means that the support CardView will still be used on L.
  * <p>
  * Due to expensive nature of rounded corner clipping, on platforms before L, CardView does not clip
  * its children that intersect with rounded corners. Instead, it adds padding to avoid such
@@ -41,9 +44,7 @@ public class CardView extends FrameLayout implements CardViewDelegate {
 
     private final static CardViewImpl IMPL;
     static {
-        if ("L".equals(Build.VERSION.CODENAME) || Build.VERSION.SDK_INT >= 21) {
-            IMPL = new CardViewApi21();
-        } else if (Build.VERSION.SDK_INT >= 17) {
+        if (Build.VERSION.SDK_INT >= 17) {
             IMPL = new CardViewJellybeanMr1();
         } else {
             IMPL = new CardViewEclairMr1();

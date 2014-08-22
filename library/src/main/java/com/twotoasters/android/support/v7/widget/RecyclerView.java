@@ -693,7 +693,7 @@ public class RecyclerView extends ViewGroup {
      * LayoutManager. </p>
      *
      * @return The horizontal offset of the scrollbar's thumb
-     * @see android.support.v7.widget.RecyclerView.LayoutManager#computeHorizontalScrollOffset
+     * @see com.twotoasters.android.support.v7.widget.RecyclerView.LayoutManager#computeHorizontalScrollOffset
      * (RecyclerView.Adapter)
      */
     @Override
@@ -758,7 +758,7 @@ public class RecyclerView extends ViewGroup {
      * LayoutManager.</p>
      *
      * @return The vertical offset of the scrollbar's thumb
-     * @see android.support.v7.widget.RecyclerView.LayoutManager#computeVerticalScrollOffset
+     * @see com.twotoasters.android.support.v7.widget.RecyclerView.LayoutManager#computeVerticalScrollOffset
      * (RecyclerView.Adapter)
      */
     @Override
@@ -1321,7 +1321,7 @@ public class RecyclerView extends ViewGroup {
     /**
      * Sets the {@link com.twotoasters.android.support.v7.widget.RecyclerView.ItemAnimator} that will handle animations involving changes
      * to the items in this RecyclerView. By default, RecyclerView instantiates and
-     * uses an instance of {@link android.support.v7.widget.DefaultItemAnimator}. Whether item animations are
+     * uses an instance of {@link com.twotoasters.android.support.v7.widget.DefaultItemAnimator}. Whether item animations are
      * enabled for the RecyclerView depends on the ItemAnimator and whether
      * the LayoutManager {@link com.twotoasters.android.support.v7.widget.RecyclerView.LayoutManager#supportsPredictiveItemAnimations()
      * supports item animations}.

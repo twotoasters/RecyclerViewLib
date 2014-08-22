@@ -14,7 +14,8 @@ public class ReViewHolder extends ViewHolder {
     public ReViewHolder(View itemView) {
         super(itemView);
         cardView = (CardView) itemView;
-        cardView.setRadius(itemView.getContext().getResources().getDimension(R.dimen.card_radius));
+        cardView.setRadius(itemView.getResources().getDimension(R.dimen.card_radius));
+
         textView = (TextView) cardView.getChildAt(0);
     }
 }
