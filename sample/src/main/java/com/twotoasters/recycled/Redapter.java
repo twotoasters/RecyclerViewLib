@@ -1,11 +1,12 @@
 package com.twotoasters.recycled;
 
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
+import com.twotoasters.android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 import java.util.Random;

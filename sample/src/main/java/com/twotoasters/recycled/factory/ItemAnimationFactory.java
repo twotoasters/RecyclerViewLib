@@ -1,6 +1,6 @@
 package com.twotoasters.recycled.factory;
 
-import android.support.v7.widget.DefaultItemAnimator;
+import com.twotoasters.android.support.v7.widget.DefaultItemAnimator;
 import com.twotoasters.anim.PendingItemAnimator;
 import com.twotoasters.recycled.animator.FlipDownItemAnimator;
 import com.twotoasters.recycled.animator.FlyItemAnimator;

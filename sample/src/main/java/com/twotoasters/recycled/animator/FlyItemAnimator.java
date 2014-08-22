@@ -2,12 +2,12 @@ package com.twotoasters.recycled.animator;
 
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
-import android.support.v7.widget.RecyclerView.LayoutParams;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.BounceInterpolator;
 
+import com.twotoasters.android.support.v7.widget.RecyclerView.LayoutParams;
+import com.twotoasters.android.support.v7.widget.RecyclerView.ViewHolder;
 import com.twotoasters.anim.PendingItemAnimator;
 import com.twotoasters.recycled.ReViewHolder;
 

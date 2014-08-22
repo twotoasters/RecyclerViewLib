@@ -9,8 +9,8 @@ import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.view.View;
 
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
+import com.twotoasters.android.support.v7.widget.RecyclerView;
+import com.twotoasters.android.support.v7.widget.RecyclerView.ViewHolder;
 
 import java.util.ArrayList;
 

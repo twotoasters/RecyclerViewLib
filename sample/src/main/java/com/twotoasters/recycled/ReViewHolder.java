@@ -4,8 +4,8 @@ package com.twotoasters.recycled;
 import android.view.View;
 import android.widget.TextView;
 
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
+import com.twotoasters.android.support.v7.widget.CardView;
+import com.twotoasters.android.support.v7.widget.RecyclerView.ViewHolder;
 
 public class ReViewHolder extends ViewHolder {
     public CardView cardView;
