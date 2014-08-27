@@ -31,10 +31,10 @@ public class RecycleActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        restoreState(savedInstanceState);
 
         setContentView(R.layout.activity_recycle);
         mRecyclerView = findWidgetById(R.id.recyclerview);
+        restoreState(savedInstanceState);
 
         mAnimationArray = getResources().getStringArray(R.array.animations);
         changeAnimation(mAnimationIndex);
