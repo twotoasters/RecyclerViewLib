@@ -8,8 +8,8 @@ import com.twotoasters.android.support.v7.widget.CardView;
 import com.twotoasters.android.support.v7.widget.RecyclerView.ViewHolder;
 
 public class ReViewHolder extends ViewHolder {
-    public CardView cardView;
-    public TextView textView;
+    public final CardView cardView;
+    public final TextView textView;
 
     public ReViewHolder(View itemView) {
         super(itemView);

@@ -12,25 +12,28 @@ import java.util.List;
 import java.util.Random;
 
 public class Redapter extends RecyclerView.Adapter<ReViewHolder> {
-    private List<Item> names;
+    private List<Item> mNames;
 
     public Redapter(List<Item> names) {
-        this.names = names;
+        this.mNames = names;
     }
 
+    /**
+     * @param name to be added to the list in a random position.
+     */
     public void addToList(Item name) {
         int position = 0;
-        if (names.size() > 1) {
+        if (mNames.size() > 1) {
             // Put the new name in a random place.
-            position = new Random().nextInt(names.size() - 1);
+            position = new Random().nextInt(mNames.size() - 1);
         }
-        names.add(position, name);
+        mNames.add(position, name);
         notifyItemInserted(position);
     }
 
     public void removeItemFromList(Item name) {
-        int position = names.indexOf(name);
-        names.remove(position);
+        int position = mNames.indexOf(name);
+        mNames.remove(position);
         notifyItemRemoved(position);
     }
 
@@ -44,7 +47,7 @@ public class Redapter extends RecyclerView.Adapter<ReViewHolder> {
 
     @Override
     public void onBindViewHolder(ReViewHolder viewHolder, final int position) {
-        final Item name = names.get(position);
+        final Item name = mNames.get(position);
         viewHolder.textView.setText(name.toString());
         viewHolder.textView.setOnClickListener(new OnClickListener() {
             @Override
@@ -56,6 +59,6 @@ public class Redapter extends RecyclerView.Adapter<ReViewHolder> {
 
     @Override
     public int getItemCount() {
-        return names.size();
+        return mNames.size();
     }
 }

@@ -11,6 +11,7 @@ import com.twotoasters.recycled.ReViewHolder;
 import com.twotoasters.utils.DisplayUtils;
 
 public class FromTopItemAnimator extends PendingItemAnimator<ReViewHolder> {
+
     public FromTopItemAnimator() {
         setMoveDuration(200);
         setRemoveDuration(500);

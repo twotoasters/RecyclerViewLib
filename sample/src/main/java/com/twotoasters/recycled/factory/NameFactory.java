@@ -3,7 +3,6 @@ package com.twotoasters.recycled.factory;
 import com.twotoasters.recycled.Item;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public final class NameFactory {
@@ -15,8 +14,8 @@ public final class NameFactory {
 
     private NameFactory() { }
 
-    public static List<Item> getListOfNames() {
-        List<Item> list = new ArrayList<Item>();
+    public static ArrayList<Item> getListOfNames() {
+        ArrayList<Item> list = new ArrayList<Item>();
         for (String name : ANDROID_NAMES) {
             list.add(new Item(name));
         }

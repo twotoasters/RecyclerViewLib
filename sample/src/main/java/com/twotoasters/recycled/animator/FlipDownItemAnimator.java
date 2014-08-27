@@ -9,6 +9,7 @@ import com.twotoasters.anim.PendingItemAnimator;
 import com.twotoasters.recycled.ReViewHolder;
 
 public class FlipDownItemAnimator extends PendingItemAnimator<ReViewHolder> {
+
     public FlipDownItemAnimator() {
         setAddDuration(1000);
         setRemoveDuration(500);

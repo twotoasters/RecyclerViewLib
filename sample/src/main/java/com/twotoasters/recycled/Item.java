@@ -1,14 +1,14 @@
 package com.twotoasters.recycled;
 
 public class Item {
-    private final String name;
+    private final String mName;
 
     public Item(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
     @Override
     public String toString() {
-        return name;
+        return mName;
     }
 }
