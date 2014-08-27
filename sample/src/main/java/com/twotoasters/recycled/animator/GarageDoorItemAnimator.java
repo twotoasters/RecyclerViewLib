@@ -7,6 +7,7 @@ import com.twotoasters.anim.PendingItemAnimator;
 import com.twotoasters.recycled.ReViewHolder;
 
 public class GarageDoorItemAnimator extends PendingItemAnimator<ReViewHolder> {
+
     public GarageDoorItemAnimator() {
         setAddDuration(300);
         setRemoveDuration(300);

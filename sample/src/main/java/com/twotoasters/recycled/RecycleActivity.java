@@ -8,50 +8,75 @@ import android.view.View;
 
 import com.twotoasters.android.support.v7.widget.LinearLayoutManager;
 import com.twotoasters.android.support.v7.widget.RecyclerView;
+import com.twotoasters.android.support.v7.widget.RecyclerView.ItemAnimator;
 import com.twotoasters.recycled.factory.ItemAnimationFactory;
 import com.twotoasters.recycled.factory.NameFactory;
+
+import java.util.ArrayList;
 
 
 public class RecycleActivity extends Activity {
 
-    private Redapter adapter;
-    private RecyclerView recyclerView;
+    private static final String KEY_NAMES = "names";
+    private static final String KEY_ANIMATION_INDEX = "animationIndex";
 
-    private String[] animationArray;
+    private ArrayList<Item> mNames = NameFactory.getListOfNames();
+    private int mAnimationIndex = 0;
+
+    private Redapter mAdapter;
+    private RecyclerView mRecyclerView;
+
+    private String[] mAnimationArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        restoreState(savedInstanceState);
+
         setContentView(R.layout.activity_recycle);
+        mRecyclerView = findWidgetById(R.id.recyclerview);
 
-        animationArray = getResources().getStringArray(R.array.animations);
-        getActionBar().setTitle(animationArray[0]); // We'll always be on zero when the activity is started.
-
-        recyclerView = getWidgetById(R.id.recyclerview);
+        mAnimationArray = getResources().getStringArray(R.array.animations);
+        changeAnimation(mAnimationIndex);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.getRecycledViewPool().setMaxRecycledViews(0, 4);
-        recyclerView.setAdapter(getAdapter());
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.getRecycledViewPool().setMaxRecycledViews(0, 4);
+        mRecyclerView.setAdapter(getAdapter());
     }
 
-    public <T extends View> T getWidgetById(int resId) {
+    private void restoreState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mNames = (ArrayList<Item>) savedInstanceState.getSerializable(KEY_NAMES);
+            mAnimationIndex = savedInstanceState.getInt(KEY_ANIMATION_INDEX);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(KEY_NAMES, mNames);
+        outState.putInt(KEY_ANIMATION_INDEX, mAnimationIndex);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    public <T extends View> T findWidgetById(int resId) {
         return (T) findViewById(resId);
     }
 
     private Redapter getAdapter() {
-        if (adapter == null) {
-            adapter = new Redapter(NameFactory.getListOfNames());
+        if (mAdapter == null) {
+            mAdapter = new Redapter(mNames);
         }
-        return adapter;
+        return mAdapter;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.recycle, menu);
-        for (int i = 0; i < animationArray.length; i++) {
-            menu.add(1, i, i, animationArray[i]);
+        for (int i = 0; i < mAnimationArray.length; i++) {
+            menu.add(1, i, i, mAnimationArray[i]);
             MenuItem item = menu.findItem(i);
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         }
@@ -69,20 +94,23 @@ public class RecycleActivity extends Activity {
                 getAdapter().addToList(NameFactory.getRandomName());
                 return true;
             default:
-                if (isInAnimationArray(id)) {
-                    return changeAnimation(id);
-                }
+                if (changeAnimation(id)) return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private boolean isInAnimationArray(int id) {
-        return id >= 0 && id < animationArray.length;
+        return id >= 0 && id < mAnimationArray.length;
     }
 
     private boolean changeAnimation(int index) {
-        recyclerView.setItemAnimator(ItemAnimationFactory.getAnimator(index));
-        getActionBar().setTitle(animationArray[index]);
+        if (!isInAnimationArray(mAnimationIndex)) return false;
+
+        mAnimationIndex = index;
+        ItemAnimator itemAnimator = ItemAnimationFactory.getAnimator(index);
+
+        mRecyclerView.setItemAnimator(itemAnimator);
+        getActionBar().setTitle(mAnimationArray[index]);
         return true;
     }
 }
