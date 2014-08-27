@@ -14,7 +14,8 @@ import com.twotoasters.android.support.v7.widget.RecyclerView.ViewHolder;
 
 import java.util.ArrayList;
 
-/** This was pulled from support 21 rc1. It looked incomplete and will prob not be used in the future. **/
+/** This was pulled from support 21 rc1. This makes sure your options always happen in a certain order
+ * Remove -> Move -> Add. **/
 public abstract class PendingItemAnimator<H extends ViewHolder> extends RecyclerView.ItemAnimator {
 
     private ArrayList<H> mPendingRemovals = new ArrayList<H>();

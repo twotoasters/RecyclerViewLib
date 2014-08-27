@@ -79,7 +79,10 @@ public class RecyclerView extends ViewGroup {
     private static final String TAG = "RecyclerView";
 
     private static final boolean DEBUG = false;
-    private static final boolean ENABLE_PREDICTIVE_ANIMATIONS = false;
+    private static final boolean ENABLE_PREDICTIVE_ANIMATIONS = true;
+
+    private boolean mIsDebugLoggingEnabled = DEBUG;
+    private boolean mIsPredictiveAnimationsEnabled = ENABLE_PREDICTIVE_ANIMATIONS;
 
     private static final boolean DISPATCH_TEMP_DETACH = false;
     public static final int HORIZONTAL = 0;
@@ -245,6 +248,38 @@ public class RecyclerView extends ViewGroup {
      */
     public boolean hasFixedSize() {
         return mHasFixedSize;
+    }
+
+    /**
+     * This method does not exist in the support library. It is here to help you debug if you have problems.
+     * @return true if the debug statements should be appear in your logcat. Default is false.
+     */
+    public boolean isDebugLoggingEnabled() {
+        return mIsDebugLoggingEnabled;
+    }
+
+    /**
+     * This method does not exist in the support library. It is here to help you debug if you have problems.
+     * @param isDebugLoggingEnabled true if the debug statements should be appear in your logcat.
+     */
+    public void setDebugLoggingEnabled(boolean isDebugLoggingEnabled) {
+        this.mIsDebugLoggingEnabled = isDebugLoggingEnabled;
+    }
+
+    /**
+     * This method does not exist in the support library. This allows for smarter animations.
+     * @return true if smarter animations are enabled. This is true by default in this library but the support library has this off by default.
+     */
+    public boolean isPredictiveAnimationsEnabled() {
+        return mIsPredictiveAnimationsEnabled;
+    }
+
+    /**
+     * This method does not exist in the support library. This allows for smarter animations.
+     * @return true if smarter animations are enabled. This is true by default in this library but the support library has this off by default.
+     */
+    public void setPredictiveAnimationsEnabled(boolean isPredictiveAnimationsEnabled) {
+        this.mIsPredictiveAnimationsEnabled = isPredictiveAnimationsEnabled;
     }
 
     /**
@@ -1401,7 +1436,7 @@ public class RecyclerView extends ViewGroup {
         // prelayout step)
         boolean animateChangesSimple = mItemAnimator != null && mItemsAddedOrRemoved
                 && !mItemsChanged;
-        final boolean animateChangesAdvanced = ENABLE_PREDICTIVE_ANIMATIONS &&
+        final boolean animateChangesAdvanced = mIsPredictiveAnimationsEnabled &&
                 animateChangesSimple && predictiveItemAnimationsEnabled();
         mItemsAddedOrRemoved = mItemsChanged = false;
         ArrayMap<View, Rect> appearingViewInitialBounds = null;
@@ -1517,7 +1552,7 @@ public class RecyclerView extends ViewGroup {
                 if (preInfo != null && postInfo != null) {
                     if (preInfo.left != postInfo.left || preInfo.top != postInfo.top) {
                         postHolder.setIsRecyclable(false);
-                        if (DEBUG) {
+                        if (mIsDebugLoggingEnabled) {
                             Log.d(TAG, "PERSISTENT: " + postHolder +
                                     " with view " + postHolder.itemView);
                         }
@@ -1543,7 +1578,7 @@ public class RecyclerView extends ViewGroup {
                 (beforeBounds.left != afterLeft || beforeBounds.top != afterTop)) {
             // slide items in if before/after locations differ
             itemHolder.setIsRecyclable(false);
-            if (DEBUG) {
+            if (mIsDebugLoggingEnabled) {
                 Log.d(TAG, "APPEARING: " + itemHolder + " with view " + newItemView);
             }
             if (mItemAnimator.animateMove(itemHolder,
@@ -1552,7 +1587,7 @@ public class RecyclerView extends ViewGroup {
                 postAnimationRunner();
             }
         } else {
-            if (DEBUG) {
+            if (mIsDebugLoggingEnabled) {
                 Log.d(TAG, "ADDED: " + itemHolder + " with view " + newItemView);
             }
             itemHolder.setIsRecyclable(false);
@@ -1574,7 +1609,7 @@ public class RecyclerView extends ViewGroup {
             disappearingItemView.layout(newLeft, newTop,
                     newLeft + disappearingItemView.getWidth(),
                     newTop + disappearingItemView.getHeight());
-            if (DEBUG) {
+            if (mIsDebugLoggingEnabled) {
                 Log.d(TAG, "DISAPPEARING: " + disappearingItem.holder +
                         " with view " + disappearingItemView);
             }
@@ -1583,7 +1618,7 @@ public class RecyclerView extends ViewGroup {
                 postAnimationRunner();
             }
         } else {
-            if (DEBUG) {
+            if (mIsDebugLoggingEnabled) {
                 Log.d(TAG, "REMOVED: " + disappearingItem.holder +
                         " with view " + disappearingItemView);
             }
@@ -1743,7 +1778,7 @@ public class RecyclerView extends ViewGroup {
             final UpdateOp op = mPendingUpdates.get(i);
             switch (op.cmd) {
                 case UpdateOp.ADD:
-                    if (DEBUG) {
+                    if (mIsDebugLoggingEnabled) {
                         Log.d(TAG, "UpdateOp.ADD start=" + op.positionStart + " count=" +
                                 op.itemCount);
                     }
@@ -1751,7 +1786,7 @@ public class RecyclerView extends ViewGroup {
                     mItemsAddedOrRemoved = true;
                     break;
                 case UpdateOp.REMOVE:
-                    if (DEBUG) {
+                    if (mIsDebugLoggingEnabled) {
                         Log.d(TAG, "UpdateOp.REMOVE start=" + op.positionStart + " count=" +
                                 op.itemCount);
                     }
@@ -1767,7 +1802,7 @@ public class RecyclerView extends ViewGroup {
                     mItemsAddedOrRemoved = true;
                     break;
                 case UpdateOp.UPDATE:
-                    if (DEBUG) {
+                    if (mIsDebugLoggingEnabled) {
                         Log.d(TAG, "UpdateOp.UPDATE start=" + op.positionStart + " count=" +
                                 op.itemCount);
                     }
@@ -1795,7 +1830,7 @@ public class RecyclerView extends ViewGroup {
         for (int i = 0; i < childCount; i++) {
             final ViewHolder holder = getChildViewHolderInt(getChildAt(i));
             if (holder != null && holder.mPosition >= positionStart) {
-                if (DEBUG) {
+                if (mIsDebugLoggingEnabled) {
                     Log.d(TAG, "offsetPositionRecordsForInsert attached child " + i + " holder " +
                             holder + " now at position " + (holder.mPosition + itemCount));
                 }
@@ -1814,7 +1849,7 @@ public class RecyclerView extends ViewGroup {
             final ViewHolder holder = getChildViewHolderInt(getChildAt(i));
             if (holder != null) {
                 if (holder.mPosition >= positionEnd) {
-                    if (DEBUG) {
+                    if (mIsDebugLoggingEnabled) {
                         Log.d(TAG, "offsetPositionRecordsForRemove attached child " + i +
                                 " holder " + holder + " now at position " +
                                 (holder.mPosition - itemCount));
@@ -1822,7 +1857,7 @@ public class RecyclerView extends ViewGroup {
                     holder.offsetPosition(-itemCount);
                     mState.mStructureChanged = true;
                 } else if (holder.mPosition >= positionStart) {
-                    if (DEBUG) {
+                    if (mIsDebugLoggingEnabled) {
                         Log.d(TAG, "offsetPositionRecordsForRemove attached child " + i +
                                 " holder " + holder + " now REMOVED");
                     }
@@ -2447,7 +2482,7 @@ public class RecyclerView extends ViewGroup {
                 return true;
             }
             if (offsetPosition < 0 || offsetPosition >= mAdapter.getItemCount()) {
-                if (DEBUG) {
+                if (mIsDebugLoggingEnabled) {
                     Log.d(TAG, "validateViewHolderForOffsetPosition: invalid position, returning "
                             + "false");
                 }
@@ -2510,14 +2545,14 @@ public class RecyclerView extends ViewGroup {
                 } else {
                     holder = mAdapter.createViewHolder(RecyclerView.this,
                             mAdapter.getItemViewType(offsetPosition));
-                    if (DEBUG) {
+                    if (mIsDebugLoggingEnabled) {
                         Log.d(TAG, "getViewForPosition created new ViewHolder");
                     }
                 }
             }
 
             if (!holder.isRemoved() && (!holder.isBound() || holder.needsUpdate())) {
-                if (DEBUG) {
+                if (mIsDebugLoggingEnabled) {
                     Log.d(TAG, "getViewForPosition unbound holder or needs update; updating...");
                 }
 
@@ -2672,7 +2707,7 @@ public class RecyclerView extends ViewGroup {
                     }
                     mAttachedScrap.remove(i);
                     holder.setScrapContainer(null);
-                    if (DEBUG) {
+                    if (mIsDebugLoggingEnabled) {
                         Log.d(TAG, "getScrapViewForPosition(" + position + ", " + type +
                             ") found exact match in scrap: " + holder);
                     }
@@ -2697,7 +2732,7 @@ public class RecyclerView extends ViewGroup {
                     if (holder.isInvalid() &&
                             (type != INVALID_TYPE && holder.getItemViewType() != type)) {
                         // Can't use it. We don't know where it's been.
-                        if (DEBUG) {
+                        if (mIsDebugLoggingEnabled) {
                             Log.d(TAG, "getScrapViewForPosition(" + position + ", " + type +
                                     ") found position match, but holder is invalid with type " +
                                     holder.getItemViewType());
@@ -2714,7 +2749,7 @@ public class RecyclerView extends ViewGroup {
                         // we won't find another match here.
                         break;
                     }
-                    if (DEBUG) {
+                    if (mIsDebugLoggingEnabled) {
                         Log.d(TAG, "getScrapViewForPosition(" + position + ", " + type +
                                 ") found match in cache: " + holder);
                     }
@@ -2723,7 +2758,7 @@ public class RecyclerView extends ViewGroup {
             }
 
             // Give up. Head to the shared pool.
-            if (DEBUG) {
+            if (mIsDebugLoggingEnabled) {
                 Log.d(TAG, "getScrapViewForPosition(" + position + ", " + type +
                     ") fetching from shared pool");
             }
@@ -2769,7 +2804,7 @@ public class RecyclerView extends ViewGroup {
             if (mAdapter != null) {
                 mAdapter.onViewRecycled(holder);
             }
-            if (DEBUG) Log.d(TAG, "dispatchViewRecycled: " + holder);
+            if (mIsDebugLoggingEnabled) Log.d(TAG, "dispatchViewRecycled: " + holder);
         }
 
         void onAdapterChanged(Adapter oldAdapter, Adapter newAdapter) {
@@ -2782,7 +2817,7 @@ public class RecyclerView extends ViewGroup {
             for (int i = 0; i < cachedCount; i++) {
                 final ViewHolder holder = mCachedViews.get(i);
                 if (holder != null && holder.getPosition() >= insertedAt) {
-                    if (DEBUG) {
+                    if (mIsDebugLoggingEnabled) {
                         Log.d(TAG, "offsetPositionRecordsForInsert cached " + i + " holder " +
                                 holder + " now at position " + (holder.mPosition + count));
                     }
@@ -2798,7 +2833,7 @@ public class RecyclerView extends ViewGroup {
                 final ViewHolder holder = mCachedViews.get(i);
                 if (holder != null) {
                     if (holder.getPosition() >= removedEnd) {
-                        if (DEBUG) {
+                        if (mIsDebugLoggingEnabled) {
                             Log.d(TAG, "offsetPositionRecordsForRemove cached " + i +
                                     " holder " + holder + " now at position " +
                                     (holder.mPosition - count));
@@ -2806,7 +2841,7 @@ public class RecyclerView extends ViewGroup {
                         holder.offsetPosition(-count);
                     } else if (holder.getPosition() >= removedFrom) {
                         // Item for this view was removed. Dump it from the cache.
-                        if (DEBUG) {
+                        if (mIsDebugLoggingEnabled) {
                             Log.d(TAG, "offsetPositionRecordsForRemove cached " + i +
                                     " holder " + holder + " now placed in pool");
                         }

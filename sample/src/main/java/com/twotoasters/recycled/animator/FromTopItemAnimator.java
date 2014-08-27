@@ -8,7 +8,7 @@ import android.view.animation.OvershootInterpolator;
 
 import com.twotoasters.anim.PendingItemAnimator;
 import com.twotoasters.recycled.ReViewHolder;
-import com.twotoasters.utils.DisplayHelper;
+import com.twotoasters.utils.DisplayUtils;
 
 public class FromTopItemAnimator extends PendingItemAnimator<ReViewHolder> {
     public FromTopItemAnimator() {
@@ -24,7 +24,7 @@ public class FromTopItemAnimator extends PendingItemAnimator<ReViewHolder> {
 
     @Override
     protected ViewPropertyAnimatorCompat animateRemoveImpl(ReViewHolder holder) {
-        Point screen = DisplayHelper.getScreenDimensions(holder.itemView.getContext());
+        Point screen = DisplayUtils.getScreenDimensions(holder.itemView.getContext());
         int top = holder.itemView.getTop();
         return ViewCompat.animate(holder.itemView)
                 .rotation(80)
