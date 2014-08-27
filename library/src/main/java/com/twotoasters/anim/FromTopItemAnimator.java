@@ -1,4 +1,4 @@
-package com.twotoasters.recycled.animator;
+package com.twotoasters.anim;
 
 import android.graphics.Point;
 import android.support.v4.view.ViewCompat;
@@ -6,11 +6,10 @@ import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
-import com.twotoasters.anim.PendingItemAnimator;
-import com.twotoasters.recycled.ReViewHolder;
+import com.twotoasters.android.support.v7.widget.RecyclerView.ViewHolder;
 import com.twotoasters.utils.DisplayUtils;
 
-public class FromTopItemAnimator extends PendingItemAnimator<ReViewHolder> {
+public class FromTopItemAnimator extends PendingItemAnimator {
 
     public FromTopItemAnimator() {
         setMoveDuration(200);
@@ -19,12 +18,12 @@ public class FromTopItemAnimator extends PendingItemAnimator<ReViewHolder> {
     }
 
     @Override
-    protected boolean prepHolderForAnimateRemove(ReViewHolder holder) {
+    protected boolean prepHolderForAnimateRemove(ViewHolder holder) {
         return true;
     }
 
     @Override
-    protected ViewPropertyAnimatorCompat animateRemoveImpl(ReViewHolder holder) {
+    protected ViewPropertyAnimatorCompat animateRemoveImpl(ViewHolder holder) {
         Point screen = DisplayUtils.getScreenDimensions(holder.itemView.getContext());
         int top = holder.itemView.getTop();
         return ViewCompat.animate(holder.itemView)
@@ -34,26 +33,26 @@ public class FromTopItemAnimator extends PendingItemAnimator<ReViewHolder> {
     }
 
     @Override
-    protected void onRemoveCanceled(ReViewHolder holder) {
+    protected void onRemoveCanceled(ViewHolder holder) {
         ViewCompat.setTranslationY(holder.itemView, 0);
     }
 
     @Override
-    protected boolean prepHolderForAnimateAdd(ReViewHolder holder) {
+    protected boolean prepHolderForAnimateAdd(ViewHolder holder) {
         int bottom = holder.itemView.getBottom();
         ViewCompat.setTranslationY(holder.itemView, - bottom);
         return true;
     }
 
     @Override
-    protected ViewPropertyAnimatorCompat animateAddImpl(ReViewHolder holder) {
+    protected ViewPropertyAnimatorCompat animateAddImpl(ViewHolder holder) {
         return ViewCompat.animate(holder.itemView)
                 .translationY(0)
                 .setInterpolator(new OvershootInterpolator());
     }
 
     @Override
-    protected void onAddCanceled(ReViewHolder holder) {
+    protected void onAddCanceled(ViewHolder holder) {
         ViewCompat.setTranslationY(holder.itemView, 0);
     }
 }

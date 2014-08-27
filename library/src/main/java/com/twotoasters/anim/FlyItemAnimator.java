@@ -1,4 +1,4 @@
-package com.twotoasters.recycled.animator;
+package com.twotoasters.anim;
 
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
@@ -8,11 +8,8 @@ import android.view.animation.BounceInterpolator;
 
 import com.twotoasters.android.support.v7.widget.RecyclerView.LayoutParams;
 import com.twotoasters.android.support.v7.widget.RecyclerView.ViewHolder;
-import com.twotoasters.anim.PendingItemAnimator;
-import com.twotoasters.recycled.ReViewHolder;
 
-public class FlyItemAnimator extends PendingItemAnimator<ReViewHolder> {
-
+public class FlyItemAnimator extends PendingItemAnimator {
     public FlyItemAnimator() {
         setAddDuration(1000);
         setRemoveDuration(500);
@@ -20,11 +17,11 @@ public class FlyItemAnimator extends PendingItemAnimator<ReViewHolder> {
     }
 
     @Override
-    protected boolean prepHolderForAnimateRemove(ReViewHolder holder) {
+    protected boolean prepHolderForAnimateRemove(ViewHolder holder) {
         return true;
     }
 
-    protected ViewPropertyAnimatorCompat animateRemoveImpl(ReViewHolder holder) {
+    protected ViewPropertyAnimatorCompat animateRemoveImpl(ViewHolder holder) {
         final View view = holder.itemView;
         ViewCompat.animate(view).cancel();
         final int width = getWidth(holder);
@@ -34,18 +31,18 @@ public class FlyItemAnimator extends PendingItemAnimator<ReViewHolder> {
     }
 
     @Override
-    protected void onRemoveCanceled(ReViewHolder holder) {
+    protected void onRemoveCanceled(ViewHolder holder) {
         ViewCompat.setTranslationX(holder.itemView, 0);
     }
 
     @Override
-    protected boolean prepHolderForAnimateAdd(ReViewHolder holder) {
+    protected boolean prepHolderForAnimateAdd(ViewHolder holder) {
         int width = getWidth(holder);
         ViewCompat.setTranslationX(holder.itemView, width);
         return true;
     }
 
-    protected ViewPropertyAnimatorCompat animateAddImpl(ReViewHolder holder) {
+    protected ViewPropertyAnimatorCompat animateAddImpl(ViewHolder holder) {
         final View view = holder.itemView;
         ViewCompat.animate(view).cancel();
         int width = getWidth(holder);
@@ -55,7 +52,7 @@ public class FlyItemAnimator extends PendingItemAnimator<ReViewHolder> {
     }
 
     @Override
-    protected void onAddCanceled(ReViewHolder holder) {
+    protected void onAddCanceled(ViewHolder holder) {
         ViewCompat.setTranslationX(holder.itemView, 0);
     }
 
