@@ -3,7 +3,7 @@
     <string-array name="animations">
         <item>Fade (Default)</item>
         <item>Flip Down</item>
-        <item>Fly Right</item>
+        <item>Slide</item>
         <item>From Top</item>
         <item>Garage Door</item>
     </string-array>
