@@ -25,7 +25,7 @@ This library has made it easy to get full access to RecyclerView and CardView ha
 
 ## What's Added
 - **PendingItemAnimator**: This abstract class is strongly based on the support libraries `DefaultItemAnimator`. This makes your animations always occur in a particular order. 
-**Add -> Move -> Remove**
+**Remove -> Move -> Add**
 - **DisplayUtil**: Simple helper class to give you windows dimensions and convert dp->px and px->dp. Hopefully it will help out with your sick animations that you'll be creating.
 
 ## How to use it

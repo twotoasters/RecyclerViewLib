@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.twotoasters.android.support.v7.widget.LinearLayoutManager;
 import com.twotoasters.android.support.v7.widget.RecyclerView;
@@ -41,7 +42,6 @@ public class RecycleActivity extends Activity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.getRecycledViewPool().setMaxRecycledViews(0, 4);
         mRecyclerView.setAdapter(getAdapter());
     }
 
@@ -49,6 +49,8 @@ public class RecycleActivity extends Activity {
         if (savedInstanceState != null) {
             mNames = (ArrayList<Item>) savedInstanceState.getSerializable(KEY_NAMES);
             mAnimationIndex = savedInstanceState.getInt(KEY_ANIMATION_INDEX);
+        } else {
+            Toast.makeText(this, R.string.tap_to_remove, Toast.LENGTH_LONG).show();
         }
     }
 

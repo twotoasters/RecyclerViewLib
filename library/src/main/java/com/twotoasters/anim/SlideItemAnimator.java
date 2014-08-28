@@ -9,8 +9,8 @@ import android.view.animation.BounceInterpolator;
 import com.twotoasters.android.support.v7.widget.RecyclerView.LayoutParams;
 import com.twotoasters.android.support.v7.widget.RecyclerView.ViewHolder;
 
-public class FlyItemAnimator extends PendingItemAnimator {
-    public FlyItemAnimator() {
+public class SlideItemAnimator extends PendingItemAnimator {
+    public SlideItemAnimator() {
         setAddDuration(1000);
         setRemoveDuration(500);
         setMoveDuration(500);
