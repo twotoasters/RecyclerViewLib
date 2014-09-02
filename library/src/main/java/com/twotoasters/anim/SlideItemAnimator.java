@@ -8,6 +8,7 @@ import android.view.animation.BounceInterpolator;
 
 import com.twotoasters.android.support.v7.widget.RecyclerView.LayoutParams;
 import com.twotoasters.android.support.v7.widget.RecyclerView.ViewHolder;
+import com.twotoasters.utils.DisplayUtils;
 
 public class SlideItemAnimator extends PendingItemAnimator {
     public SlideItemAnimator() {
@@ -24,9 +25,8 @@ public class SlideItemAnimator extends PendingItemAnimator {
     protected ViewPropertyAnimatorCompat animateRemoveImpl(ViewHolder holder) {
         final View view = holder.itemView;
         ViewCompat.animate(view).cancel();
-        final int width = getWidth(holder);
         return ViewCompat.animate(view)
-                .translationXBy(width)
+                .translationX(DisplayUtils.getScreenDimensions(holder.itemView.getContext()).x)
                 .setInterpolator(new AnticipateOvershootInterpolator());
     }
 
