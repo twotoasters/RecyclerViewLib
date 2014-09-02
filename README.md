@@ -8,7 +8,23 @@ A RecyclerView library that is **easy** to implement **and safe** to implement.
 
 Sample app link on its way.
 
-maven and gradle dependencies on their way!
+If you are using maven add to your pom file:
+```xml
+<dependency>
+    <groupId>com.twotoasters.RecyclerViewLib</groupId>
+    <artifactId>library</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+or if you are using Gradle:
+
+```groovy
+
+dependencies {
+    compile 'com.twotoasters.RecyclerViewLib:library:1.0.+'
+}
+```
 
 ## Background on RecyclerView
 To learn more about RecyclerView checkout [this blog post](http://www.grokkingandroid.com/first-glance-androids-recyclerview/).
