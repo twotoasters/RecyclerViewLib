@@ -28,3 +28,5 @@ dependencies {
     compile 'com.android.support:support-v4:20.0.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+apply from: 'https://raw.github.com/twotoasters/gradle-mvn-push/master/gradle-mvn-push.gradle'
