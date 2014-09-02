@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.twotoasters.android.support.v7.widget.LinearLayoutManager;
 import com.twotoasters.android.support.v7.widget.RecyclerView;
 import com.twotoasters.android.support.v7.widget.RecyclerView.ItemAnimator;
+import com.twotoasters.layoutmanager.GridLayoutManager;
 import com.twotoasters.recycled.factory.ItemAnimationFactory;
 import com.twotoasters.recycled.factory.NameFactory;
 
@@ -19,6 +24,7 @@ public class RecycleActivity extends Activity {
 
     private static final String KEY_NAMES = "names";
     private static final String KEY_ANIMATION_INDEX = "animationIndex";
+    private static final String KEY_LAYOUT_GRID = "layoutManager";
 
     private ArrayList<Item> mNames = NameFactory.getListOfNames();
     private int mAnimationIndex = 0;
@@ -39,16 +45,30 @@ public class RecycleActivity extends Activity {
         mAnimationArray = getResources().getStringArray(R.array.animations);
         changeAnimation(mAnimationIndex);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.getRecycledViewPool().setMaxRecycledViews(0, 4);
         mRecyclerView.setAdapter(getAdapter());
+    }
+
+    private void setLayoutManager(boolean shouldBeGrid) {
+        if (mRecyclerView != null) {
+            mRecyclerView.getItemAnimator().endAnimations();
+            if (shouldBeGrid) {
+                mRecyclerView.setLayoutManager(new GridLayoutManager(RecycleActivity.this));
+            } else {
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(RecycleActivity.this));
+            }
+            // The recycle pool has to be cleared after the layout manager is changed.
+            mRecyclerView.getRecycledViewPool().clear();
+        }
     }
 
     private void restoreState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             mNames = (ArrayList<Item>) savedInstanceState.getSerializable(KEY_NAMES);
             mAnimationIndex = savedInstanceState.getInt(KEY_ANIMATION_INDEX);
+            setLayoutManager(savedInstanceState.getBoolean(KEY_LAYOUT_GRID, false));
+        } else {
+            Toast.makeText(this, R.string.tap_to_remove, Toast.LENGTH_LONG).show();
+            setLayoutManager(false);
         }
     }
 
@@ -56,6 +76,9 @@ public class RecycleActivity extends Activity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putSerializable(KEY_NAMES, mNames);
         outState.putInt(KEY_ANIMATION_INDEX, mAnimationIndex);
+        if (mRecyclerView != null) {
+            outState.putBoolean(KEY_LAYOUT_GRID, mRecyclerView.getLayoutManager() instanceof GridLayoutManager);
+        }
 
         super.onSaveInstanceState(outState);
     }
@@ -80,7 +103,21 @@ public class RecycleActivity extends Activity {
             MenuItem item = menu.findItem(i);
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         }
+        setupSwitch();
         return true;
+    }
+
+    private void setupSwitch() {
+        getActionBar().setDisplayShowCustomEnabled(true);
+        getActionBar().setCustomView(R.layout.layout_switcher);
+
+        Switch switcher = (Switch) getActionBar().getCustomView();
+        switcher.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                setLayoutManager(checked);
+            }
+        });
     }
 
     @Override

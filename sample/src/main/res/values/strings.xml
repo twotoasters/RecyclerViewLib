@@ -4,5 +4,8 @@
     <string name="app_name">Recycled</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_add">Add</string>
+    <string name="tap_to_remove">Tap an item to remove.</string>
+    <string name="grid">Grid</string>
+    <string name="list">List</string>
 
 </resources>

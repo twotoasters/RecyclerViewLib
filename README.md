@@ -8,7 +8,23 @@ A RecyclerView library that is **easy** to implement **and safe** to implement.
 
 Sample app link on its way.
 
-maven and gradle dependencies on their way!
+If you are using maven add to your pom file:
+```xml
+<dependency>
+    <groupId>com.twotoasters.RecyclerViewLib</groupId>
+    <artifactId>library</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+or if you are using Gradle:
+
+```groovy
+
+dependencies {
+    compile 'com.twotoasters.RecyclerViewLib:library:1.0.+'
+}
+```
 
 ## Background on RecyclerView
 To learn more about RecyclerView checkout [this blog post](http://www.grokkingandroid.com/first-glance-androids-recyclerview/).
@@ -25,7 +41,7 @@ This library has made it easy to get full access to RecyclerView and CardView ha
 
 ## What's Added
 - **PendingItemAnimator**: This abstract class is strongly based on the support libraries `DefaultItemAnimator`. This makes your animations always occur in a particular order. 
-**Add -> Move -> Remove**
+**Remove -> Move -> Add**
 - **DisplayUtil**: Simple helper class to give you windows dimensions and convert dp->px and px->dp. Hopefully it will help out with your sick animations that you'll be creating.
 
 ## How to use it
