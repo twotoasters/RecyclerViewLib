@@ -8,7 +8,7 @@ import java.util.Random;
 public final class NameFactory {
 
     private final static String[] ANDROID_NAMES = new String[] { "Ben", "Chris", "Curtis", "Fred", "James", "Pat", "Marcelle" };
-    private final static String[] TWO_TOASTERS_NAMES = new String[] { "Ben", "Chris", "Curtis", "Fred"
+    private final static String[] TWO_TOASTERS_NAMES = new String[] { "Ben", "Chris", "Curtis", "Fred", "Sean"
             , "James", "Pat", "Rachit", "Adit", "Matt", "Josh", "Kayla", "Simon", "Joe", "Harold", "Danie"
             , "Dustin", "Darwin", "Karl", "Jason", "Kevin", "Prachi", "Duncan", "Tom", "Steve", "Ameir", "Jill"};
 
