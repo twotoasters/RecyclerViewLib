@@ -1749,7 +1749,8 @@ public class RecyclerView extends ViewGroup {
                 }
             }
         }
-        return position + offset;
+        int newOffset = position + offset;
+        return newOffset >= 0 ? newOffset : 0;
     }
 
     void dispatchLayoutUpdates() {
