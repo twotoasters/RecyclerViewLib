@@ -7,22 +7,12 @@ A RecyclerView library that is **easy** to implement **and safe** to implement.
 ## Download
 
 Sample app link on its way.
-
-If you are using maven add to your pom file:
-```xml
-<dependency>
-    <groupId>com.twotoasters.RecyclerViewLib</groupId>
-    <artifactId>library</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
-or if you are using Gradle:
+In your build.gradle
 
 ```groovy
 
 dependencies {
-    compile 'com.twotoasters.RecyclerViewLib:library:1.0.+'
+    compile 'com.twotoasters.RecyclerViewLib:library:1.0.+@aar'
 }
 ```
 
