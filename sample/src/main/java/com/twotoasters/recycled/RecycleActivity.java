@@ -29,7 +29,7 @@ public class RecycleActivity extends Activity {
     private ArrayList<Item> mNames = NameFactory.getListOfNames();
     private int mAnimationIndex = 0;
 
-    private Redapter mAdapter;
+    private NameAdapter mAdapter;
     private RecyclerView mRecyclerView;
 
     private String[] mAnimationArray;
@@ -87,9 +87,9 @@ public class RecycleActivity extends Activity {
         return (T) findViewById(resId);
     }
 
-    private Redapter getAdapter() {
+    private NameAdapter getAdapter() {
         if (mAdapter == null) {
-            mAdapter = new Redapter(mNames);
+            mAdapter = new NameAdapter(mNames);
         }
         return mAdapter;
     }

@@ -11,10 +11,10 @@ import com.twotoasters.android.support.v7.widget.RecyclerView;
 import java.util.List;
 import java.util.Random;
 
-public class Redapter extends RecyclerView.Adapter<ReViewHolder> {
+public class NameAdapter extends RecyclerView.Adapter<NameViewHolder> {
     private List<Item> mNames;
 
-    public Redapter(List<Item> names) {
+    public NameAdapter(List<Item> names) {
         this.mNames = names;
     }
 
@@ -39,14 +39,14 @@ public class Redapter extends RecyclerView.Adapter<ReViewHolder> {
 
 
     @Override
-    public ReViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NameViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item, parent, false);
-        return new ReViewHolder(view);
+        return new NameViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ReViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(NameViewHolder viewHolder, final int position) {
         final Item name = mNames.get(position);
         viewHolder.textView.setText(name.toString());
         viewHolder.textView.setOnClickListener(new OnClickListener() {
