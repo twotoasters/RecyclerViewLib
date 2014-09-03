@@ -71,7 +71,9 @@ You have to manage your data yourself in your adapter. The key difference to Lis
     }
 
 ## GridViews and CursorAdapters oh my!
-Here comes the sad part. So far the Android team has only released the `LinearLayoutManager` and `RecyclerView.Adapter`. These things are cool but they are of limit use to many people. If you want to give creating a LayoutManager a try I would love to get a pull request. While I won't require that you added it to the sample I need prof that it doesn't explode... I would also love to have pull request for different adapters, same requirements apply.
+Here comes the sad part. So far the Android team has only released the `LinearLayoutManager` and `RecyclerView.Adapter`. These things are cool but they are of limit use to many people. Fortunately we have taken the GridLayoutManager from [RecyclerViewExtension](https://github.com/antoniolg/RecyclerViewExtensions). All you have to do is use that layout manager instead, super easy. 
+
+If you want to give creating a LayoutManager a try I would love to get a pull request. While I won't require that you added it to the sample I need prof that it doesn't explode... I would also love to have pull request for different adapters, same requirements apply.
 
 
 ## License
