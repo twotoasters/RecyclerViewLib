@@ -1,6 +1,6 @@
 # ToastedRecyclerView
 
-A RecyclerView library that is **easy** to implement **and safe** to implement.
+A RecyclerView library that is **easy and safe** to implement. To learn more about this library project check out our blog post on [toastdroid.com](http://toastdroid.com/2014/09/03/unlocking-recyclerview/)
 
 ---
 
