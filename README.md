@@ -1,4 +1,4 @@
-**This Library is now deprecated with the offical release of RecyclerView.**
+**This Library is now deprecated with the official release of RecyclerView.**
 
 # ToastedRecyclerView
 
